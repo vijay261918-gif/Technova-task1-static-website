@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#050510"/>
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#06b6d4" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg-grad)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="150" cy="150" r="200" fill="#8b5cf6" opacity="0.1"/>
+  <circle cx="1050" cy="480" r="180" fill="#06b6d4" opacity="0.1"/>
+  <circle cx="600" cy="315" r="100" fill="#ec4899" opacity="0.08"/>
+  
+  <!-- Grid pattern -->
+  <g stroke="#ffffff" stroke-opacity="0.02" stroke-width="1">
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/>
+  </g>
+  
+  <!-- Main text -->
+  <text x="600" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="64" font-weight="700" fill="url(#text-grad)">
+    VIJAYARAJ V
+  </text>
+  
+  <text x="600" y="330" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28" font-weight="400" fill="#b8b8d8">
+    Frontend Developer Portfolio
+  </text>
+  
+  <text x="600" y="380" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="400" fill="#7a7a9a">
+    Computer Science Engineering Student
+  </text>
+  
+  <!-- Tech tags -->
+  <g font-family="system-ui, sans-serif" font-size="14" font-weight="500">
+    <g transform="translate(350, 440)">
+      <rect width="120" height="36" rx="18" fill="#8b5cf6" opacity="0.2" stroke="#8b5cf6" stroke-opacity="0.4"/>
+      <text x="60" y="23" text-anchor="middle" fill="#8b5cf6">React</text>
+    </g>
+    <g transform="translate(500, 440)">
+      <rect width="140" height="36" rx="18" fill="#06b6d4" opacity="0.2" stroke="#06b6d4" stroke-opacity="0.4"/>
+      <text x="70" y="23" text-anchor="middle" fill="#06b6d4">Node.js</text>
+    </g>
+    <g transform="translate(670, 440)">
+      <rect width="130" height="36" rx="18" fill="#ec4899" opacity="0.2" stroke="#ec4899" stroke-opacity="0.4"/>
+      <text x="65" y="23" text-anchor="middle" fill="#ec4899">TypeScript</text>
+    </g>
+    <g transform="translate(830, 440)">
+      <rect width="110" height="36" rx="18" fill="#14b8a6" opacity="0.2" stroke="#14b8a6" stroke-opacity="0.4"/>
+      <text x="55" y="23" text-anchor="middle" fill="#14b8a6">Python</text>
+    </g>
+  </g>
+  
+  <!-- Bottom links -->
+  <text x="600" y="550" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#7a7a9a">
+    github.com/vijay261918-gif  •  linkedin.com/in/vijayaraj-v  •  vijay261918@gmail.com
+  </text>
+</svg>

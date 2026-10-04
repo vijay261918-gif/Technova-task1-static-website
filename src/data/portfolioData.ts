@@ -153,7 +153,7 @@ export const portfolioData = {
     },
   ],
   languages: ["English", "Tamil"],
-  resumeDownload: "/resume_vijay.pdf",
+  resumeDownload: "",
 };
 
 export type PortfolioData = typeof portfolioData;

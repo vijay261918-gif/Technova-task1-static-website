@@ -30,8 +30,9 @@ export const Navigation: React.FC = () => {
   };
 
   const handleDownloadResume = () => {
+    const baseUrl = import.meta.env.BASE_URL || '/';
     const link = document.createElement('a');
-    link.href = portfolioData.resumeDownload;
+    link.href = `${baseUrl}resume_vijay.pdf`;
     link.download = 'VIJAYARAJ_V_Resume.pdf';
     document.body.appendChild(link);
     link.click();

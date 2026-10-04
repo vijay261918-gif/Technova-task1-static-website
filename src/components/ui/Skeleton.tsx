@@ -18,7 +18,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
 }) => {
   const animationClasses = {
     pulse: 'animate-pulse',
-    wave: 'animate-[shimmer_1.5s_infinite]',
+    wave: 'animate-shimmer',
     none: '',
   };
 

@@ -476,6 +476,9 @@ export const Background: React.FC = () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
+      particlesRef.current = [];
+      circuitLinesRef.current = [];
+      lightningBoltsRef.current = [];
     };
   }, [reducedMotion]);
 

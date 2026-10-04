@@ -30,7 +30,6 @@ export const Hero: React.FC = () => {
   const typeIntervalRef = useRef<ReturnType<typeof setTimeout>>();
   const charIndexRef = useRef(0);
   const startedRef = useRef(false);
-  const executeNextCommandRef = useRef<() => void>();
 
   useEffect(() => {
     cursorIntervalRef.current = setInterval(() => {
@@ -40,43 +39,42 @@ export const Hero: React.FC = () => {
   }, []);
 
   const executeNextCommand = useCallback(() => {
-    if (commandIndex >= terminalCommands.length) return;
+    setCommandIndex(prevIndex => {
+      if (prevIndex >= terminalCommands.length) return prevIndex;
 
-    const cmd = terminalCommands[commandIndex];
-    
-    if (reducedMotion || cmd.type === 'instant') {
-      setCompletedCommands(prev => [...prev, { ...cmd, output: cmd.output }]);
-      setCommandIndex(prev => prev + 1);
-      return;
-    }
-
-    if (cmd.type === 'type') {
-      const fullOutput = cmd.output;
-      charIndexRef.current = 0;
-      setCurrentOutput('');
+      const cmd = terminalCommands[prevIndex];
       
-      const typeChar = () => {
-        if (charIndexRef.current < fullOutput.length) {
-          setCurrentOutput(fullOutput.slice(0, charIndexRef.current + 1));
-          charIndexRef.current++;
-          typeIntervalRef.current = setTimeout(typeChar, cmd.speed || 15);
-        } else {
-          setCompletedCommands(prev => [...prev, { ...cmd, output: fullOutput }]);
-          setCommandIndex(prev => prev + 1);
-          setCurrentOutput('');
-          charIndexRef.current = 0;
-        }
-      };
-      typeIntervalRef.current = setTimeout(typeChar, cmd.speed || 15);
-    } else if (cmd.type === 'list') {
-      setCompletedCommands(prev => [...prev, { ...cmd, output: '', items: cmd.items }]);
-      setCommandIndex(prev => prev + 1);
-    }
-  }, [commandIndex, reducedMotion]);
+      if (reducedMotion || cmd.type === 'instant') {
+        setCompletedCommands(prev => [...prev, { ...cmd, output: cmd.output }]);
+        return prevIndex + 1;
+      }
 
-  useEffect(() => {
-    executeNextCommandRef.current = executeNextCommand;
-  }, [executeNextCommand]);
+      if (cmd.type === 'type') {
+        const fullOutput = cmd.output;
+        charIndexRef.current = 0;
+        setCurrentOutput('');
+        
+        const typeChar = () => {
+          if (charIndexRef.current < fullOutput.length) {
+            setCurrentOutput(fullOutput.slice(0, charIndexRef.current + 1));
+            charIndexRef.current++;
+            typeIntervalRef.current = setTimeout(typeChar, cmd.speed || 15);
+          } else {
+            setCompletedCommands(prev => [...prev, { ...cmd, output: fullOutput }]);
+            setCommandIndex(prev => prev + 1);
+            setCurrentOutput('');
+            charIndexRef.current = 0;
+          }
+        };
+        typeIntervalRef.current = setTimeout(typeChar, cmd.speed || 15);
+        return prevIndex;
+      } else if (cmd.type === 'list') {
+        setCompletedCommands(prev => [...prev, { ...cmd, output: '', items: cmd.items }]);
+        return prevIndex + 1;
+      }
+      return prevIndex;
+    });
+  }, [reducedMotion]);
 
   useEffect(() => {
     if (reducedMotion) {
@@ -88,23 +86,24 @@ export const Hero: React.FC = () => {
     startedRef.current = true;
     
     const timer = setTimeout(() => {
-      executeNextCommandRef.current?.();
+      executeNextCommand();
     }, 800);
     return () => clearTimeout(timer);
-  }, [reducedMotion]);
+  }, [reducedMotion, executeNextCommand]);
 
   useEffect(() => {
     if (commandIndex < terminalCommands.length && !reducedMotion) {
       const cmd = terminalCommands[commandIndex];
       const delay = cmd.type === 'instant' ? 300 : cmd.type === 'type' ? 600 : 1000;
-      const timer = setTimeout(() => executeNextCommandRef.current?.(), delay);
+      const timer = setTimeout(() => executeNextCommand(), delay);
       return () => clearTimeout(timer);
     }
-  }, [commandIndex, reducedMotion]);
+  }, [commandIndex, reducedMotion, executeNextCommand]);
 
   const handleDownloadResume = () => {
+    const baseUrl = import.meta.env.BASE_URL || '/';
     const link = document.createElement('a');
-    link.href = portfolioData.resumeDownload;
+    link.href = `${baseUrl}resume_vijay.pdf`;
     link.download = 'VIJAYARAJ_V_Resume.pdf';
     document.body.appendChild(link);
     link.click();
